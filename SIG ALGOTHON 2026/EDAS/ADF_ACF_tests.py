@@ -47,6 +47,7 @@ results = []
 
 for i, j in itertools.combinations(range(n_instruments), 2):
     dcorr = dcor.distance_correlation(prices.iloc[:, i].values, prices.iloc[:, j].values)
+    print(prices.columns.values[i])
     results.append({'instrument_1': i, 'instrument_2': j, 'distance_corr': dcorr})
 
 dcorr_df = pd.DataFrame(results).sort_values('distance_corr', ascending=False)
