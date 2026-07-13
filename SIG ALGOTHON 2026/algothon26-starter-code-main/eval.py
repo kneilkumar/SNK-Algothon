@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 """Algothon 2026 evaluation script.
 
-Participants: write getMyPosition(prcSoFar) in teamName.py and update the imports below
+Participants: write getMyPosition(prcSoFar) in SNK.py and update the imports below
 """
 
 import numpy as np
 import pandas as pd
-from teamName import getMyPosition as getPosition
+from SNK import getMyPosition as getPosition
 
 nInst = 0
 nt = 0
 
 pricesFile = "./prices.txt"
-numTestDays = 250
+numTestDays = 165
 
 # parameter for scoring function
 scoreDefaultParam = 1.0
@@ -26,6 +26,7 @@ inst0CommRate = 0.00002
 # SPECIAL position limit for instrument 0
 defaultDlrPosLimit = 10_000
 inst0DlrPosLimit = 100_000
+
 
 def loadPrices(fn):
     """
