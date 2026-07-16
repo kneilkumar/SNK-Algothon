@@ -44,6 +44,9 @@ def acf_test():
 import itertools
 import dcor
 
+
+adf_test()
+
 n_instruments = 51
 results = []
 
@@ -59,13 +62,14 @@ def create_dcorr_matrix():
 
 
 def create_dcorr_matrix_returns():
-    prices_temp = prices.diff().dropna()
+    prices_temp = prices.pct_change().dropna()
     for i, j in itertools.combinations(range(n_instruments), 2):
         dcorr = dcor.distance_correlation(prices_temp.iloc[:, i].values, prices_temp.iloc[:, j].values)
         print(prices_temp.columns.values[i])
         results.append({'instrument_1': i, 'instrument_2': j, 'distance_corr': dcorr})
     dcorr_df = pd.DataFrame(results).sort_values('distance_corr', ascending=False)
     dcorr_df.to_csv('dcorr_returns_df.csv')
+
 
 
 def engle_granger(return_true):
