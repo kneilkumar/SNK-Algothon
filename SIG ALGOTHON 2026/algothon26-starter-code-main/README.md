@@ -19,7 +19,7 @@ Full rules, scoring, schedule, and submission details live on the **[Algothon 20
 python -m venv .venv
 .venv\Scripts\activate      # Windows
 source .venv/bin/activate   # macOS/Linux
-pip install -r requirements-dev.txt
+pip install -r requirements.txt-dev.txt
 ```
 
 1. Implement `getMyPosition(prcSoFar)` in `teamName.py`. No need to rename anything or touch `eval.py` while developing - `eval.py` imports from `teamName` by default.

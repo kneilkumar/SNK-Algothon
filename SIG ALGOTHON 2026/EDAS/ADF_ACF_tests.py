@@ -5,11 +5,12 @@ import numpy as np
 from johansen_engine import *
 
 prices = pd.read_csv('prices.csv')
+returns = np.log((prices/prices.shift(1)).dropna())
 
 
 def adf_test():
     for instruments in prices.columns:
-        adf_test_results = adfuller(prices[instruments], autolag='BIC', regression='c')
+        adf_test_results = adfuller(returns[instruments], autolag='BIC', regression='c')
         print(f"instrument name: {instruments}\n"
               f"adf-stat: {adf_test_results[0]}\n"
               f"n-lags: {adf_test_results[2]}\n"
@@ -45,31 +46,28 @@ import itertools
 import dcor
 
 
-adf_test()
-
 n_instruments = 51
 results = []
 
 
 def create_dcorr_matrix():
     for i, j in itertools.combinations(range(n_instruments), 2):
-        dcorr = dcor.distance_correlation(prices.iloc[:, i].values, prices.iloc[:, j].values)
+        dcorr = dcor.distance_correlation(np.log(prices.iloc[:, i].values), np.log(prices.iloc[:, j].values))
         print(prices.columns.values[i])
         results.append({'instrument_1': i, 'instrument_2': j, 'distance_corr': dcorr})
 
     dcorr_df = pd.DataFrame(results).sort_values('distance_corr', ascending=False)
-    dcorr_df.to_csv('dcorr_df.csv')
+    dcorr_df.to_csv('log_price_dcorr_df.csv')
 
 
 def create_dcorr_matrix_returns():
-    prices_temp = prices.pct_change().dropna()
+    prices_temp = np.log(prices.pct_change().dropna())
     for i, j in itertools.combinations(range(n_instruments), 2):
         dcorr = dcor.distance_correlation(prices_temp.iloc[:, i].values, prices_temp.iloc[:, j].values)
         print(prices_temp.columns.values[i])
         results.append({'instrument_1': i, 'instrument_2': j, 'distance_corr': dcorr})
     dcorr_df = pd.DataFrame(results).sort_values('distance_corr', ascending=False)
     dcorr_df.to_csv('dcorr_returns_df.csv')
-
 
 
 def engle_granger(return_true):

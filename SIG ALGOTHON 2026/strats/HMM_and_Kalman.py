@@ -9,10 +9,10 @@ prices = pd.read_csv('prices.csv')
 prices = prices
 returns = prices.pct_change().dropna()
 
-hmm_candidates = prices[['NAYO', 'MTNS', 'EELT', 'ULXY', 'BENI']]
+hmm_candidates = prices[['CTGI', 'MTNS', 'EELT', 'ULXY', 'BENI']]
 
-candidates_train = hmm_candidates.iloc[:350, ]
-candidates_test = hmm_candidates.iloc[350:, ]
+candidates_train = hmm_candidates.iloc[:500, ]
+candidates_test = hmm_candidates.iloc[500:, ]
 
 
 # Step 1: Fit the HMM for each instrument
@@ -23,7 +23,7 @@ hidden_states = [2,3,4,5]
 
 best_states = {}
 
-for instruments in ['NAYO', 'MTNS', 'EELT', 'ULXY', 'BENI']:
+for instruments in ['CTGI', 'MTNS', 'EELT', 'ULXY', 'BENI']:
     bics = []
     ks = []
     print("-------------------------")
@@ -58,7 +58,7 @@ print(best_states)
 best_states = pd.Series(best_states)
 hmm_list = []
 
-for instruments in ['NAYO', 'MTNS', 'EELT', 'ULXY', 'BENI']:
+for instruments in ['CTGI', 'MTNS', 'EELT', 'ULXY', 'BENI']:
     hmm_instance = hmm.GaussianHMM(n_components=best_states[instruments], covariance_type='full')
     reshaped = np.array(candidates_train[instruments]).reshape(-1,1)
     hmm_instance.fit(reshaped)
@@ -80,7 +80,7 @@ for instruments in ['NAYO', 'MTNS', 'EELT', 'ULXY', 'BENI']:
 # Step 2: Fit the Model.  As of now (16/07) I'm assuming a modified OU process:
 # price(t) = μ + φ(price(t-1) − μ) + noise.  μ comes from the HMM
 
-for instruments in ['NAYO', 'MTNS', 'EELT', 'ULXY', 'BENI']:
+for instruments in ['CTGI', 'MTNS', 'EELT', 'ULXY', 'BENI']:
     instrument = np.array(candidates_train[instruments])
     OU = AutoReg(instrument, lags=1, trend='ct')
     OU_fit = OU.fit()
@@ -90,13 +90,13 @@ for instruments in ['NAYO', 'MTNS', 'EELT', 'ULXY', 'BENI']:
     print(f"half life: {np.log(0.5)/np.log(OU_fit.params[2])}")
     print(f"mu: {OU_fit.params[0]/(1-OU_fit.params[2])}")
 
-    # fig, ax = plt.subplots(figsize=(8, 5))
-    # plot_pacf(instrument, lags=20, ax=ax, method='ywadjusted')
-    #
-    # plt.xlabel("Lags")
-    # plt.ylabel("Partial Autocorrelation")
-    # plt.title("Partial Autocorrelation Function (PACF)")
-    # plt.show()
+    fig, ax = plt.subplots(figsize=(8, 5))
+    plot_pacf(instrument, lags=20, ax=ax, method='ywadjusted')
+
+    plt.xlabel("Lags")
+    plt.ylabel("Partial Autocorrelation")
+    plt.title("Partial Autocorrelation Function (PACF)")
+    plt.show()
 
 
 # Step 3: Set up the Kalman Filter, because somehow the handpicked stocks are all OU processes.

@@ -1,8 +1,8 @@
 # Local development setup only - matches the grading sandbox's base image
 # exactly (numpy/pandas versions pinned, see algothon-leaderboard-runner's
-# requirements-base.txt for the source of truth).
+# requirements.txt-base.txt for the source of truth).
 #
-# Do NOT submit this file. Your submission's own requirements.txt (only
+# Do NOT submit this file. Your submission's own requirements.txt.txt (only
 # needed if you use packages beyond this list) should declare ONLY the
 # extra packages you need - not a copy of this file. Submitting a copy of
 # this file would re-declare versions of packages already pinned in the
