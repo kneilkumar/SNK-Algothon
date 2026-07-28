@@ -52,12 +52,15 @@ results = []
 
 def create_dcorr_matrix():
     for i, j in itertools.combinations(range(n_instruments), 2):
-        dcorr = dcor.distance_correlation(np.log(prices.iloc[:, i].values), np.log(prices.iloc[:, j].values))
+        dcorr = dcor.distance_correlation(np.log(prices).iloc[:, i].values, np.log(prices).iloc[:, j].values)
         print(prices.columns.values[i])
         results.append({'instrument_1': i, 'instrument_2': j, 'distance_corr': dcorr})
 
     dcorr_df = pd.DataFrame(results).sort_values('distance_corr', ascending=False)
     dcorr_df.to_csv('log_price_dcorr_df.csv')
+
+
+create_dcorr_matrix()
 
 
 def create_dcorr_matrix_returns():

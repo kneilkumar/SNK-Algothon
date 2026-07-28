@@ -81,7 +81,7 @@ SOLO_MEANREV = []  # MTNS
 # for that reason -- see module docstring).
 ALGO_RESID_MEANREV = [39, 49, 50, 15]  # AETS, MHRM, EAFC, HRET
 
-HEDGE_WINDOW = 300     # long trailing window for a stable hedge-ratio estimate
+HEDGE_WINDOW = 300    # long trailing window for a stable hedge-ratio estimate
 Z_WINDOW = 40          # short trailing window for the entry/exit z-score
 ENTRY_Z = 1.25
 EXIT_Z = 0.25
@@ -173,35 +173,6 @@ def _run_strategy(prcSoFar):
             positions[idxA] += sig * int(shares_a)
             positions[idxB] += -sig * int(shares_b)
 
-    # ---------------- Solo mean-reversion ----------------
-    if nDays >= MIN_DAYS_SOLO:
-        for idx in SOLO_MEANREV:
-            p = prcSoFar[idx]
-            w = min(SOLO_WINDOW, nDays)
-            window = p[-w:]
-            mu, sigma = window.mean(), window.std()
-            if sigma < 1e-9:
-                continue
-            z = (window[-1] - mu) / sigma
-
-            prev = _solo_signal[idx]
-            if z > SOLO_ENTRY_Z:
-                sig = -1
-            elif z < -SOLO_ENTRY_Z:
-                sig = 1
-            elif abs(z) < SOLO_EXIT_Z:
-                sig = 0
-            else:
-                sig = prev
-            _solo_signal[idx] = sig
-
-            if sig == 0:
-                continue
-
-            price = prices_today[idx]
-            cap = ALLOC_FRACTION * POSITION_LIMITS[idx]
-            shares = int(np.floor(cap / price))
-            positions[idx] = sig * shares
 
     # ---------------- ALGO-residual mean-reversion ----------------
     # Net each instrument's price against ALGO (OLS beta over a long

@@ -1,0 +1,284 @@
+{
+  "metadata": {
+    "n_instruments": 3,
+    "n_days": 5,
+    "start_day": 1,
+    "end_day": 4,
+    "run_days": 4,
+    "commission_rate": 0.001,
+    "position_limit_dollars": 10000.0,
+    "strategy_function_name": "getMyPosition",
+    "deterministic": true,
+    "uses_simulated_price_data": false
+  },
+  "summary": {
+    "score": 3.4526110231862512,
+    "total_pnl": 20.48,
+    "total_gross_pnl": 30.0,
+    "mean_daily_pnl": 5.12,
+    "std_daily_pnl": 16.67388976813749,
+    "max_drawdown": -14.98,
+    "total_commission": 9.52,
+    "total_turnover": 9520.0,
+    "total_trades": 6,
+    "clipping_event_count": 0
+  },
+  "daily_records": [
+    {
+      "day": 1,
+      "gross_pnl": 0.0,
+      "net_pnl": -3.5,
+      "cumulative_pnl": -3.5,
+      "turnover": 3500.0,
+      "commission": 3.5,
+      "num_traded_instruments": 3,
+      "num_clipped_instruments": 0
+    },
+    {
+      "day": 2,
+      "gross_pnl": -10.0,
+      "net_pnl": -14.98,
+      "cumulative_pnl": -18.48,
+      "turnover": 4980.0,
+      "commission": 4.98,
+      "num_traded_instruments": 2,
+      "num_clipped_instruments": 0
+    },
+    {
+      "day": 3,
+      "gross_pnl": 10.0,
+      "net_pnl": 8.96,
+      "cumulative_pnl": -9.52,
+      "turnover": 1040.0,
+      "commission": 1.04,
+      "num_traded_instruments": 1,
+      "num_clipped_instruments": 0
+    },
+    {
+      "day": 4,
+      "gross_pnl": 30.0,
+      "net_pnl": 30.0,
+      "cumulative_pnl": 20.48,
+      "turnover": 0.0,
+      "commission": 0.0,
+      "num_traded_instruments": 0,
+      "num_clipped_instruments": 0
+    }
+  ],
+  "series": {
+    "days": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "daily_pnl": [
+      -3.5,
+      -14.98,
+      8.96,
+      30.0
+    ],
+    "gross_daily_pnl": [
+      0.0,
+      -10.0,
+      10.0,
+      30.0
+    ],
+    "cumulative_pnl": [
+      -3.5,
+      -18.48,
+      -9.52,
+      20.48
+    ],
+    "drawdown": [
+      0.0,
+      -14.98,
+      -6.02,
+      0.0
+    ],
+    "daily_turnover": [
+      3500.0,
+      4980.0,
+      1040.0,
+      0.0
+    ],
+    "daily_commission": [
+      3.5,
+      4.98,
+      1.04,
+      0.0
+    ]
+  },
+  "positions": [
+    [
+      10,
+      10,
+      -10
+    ],
+    [
+      10,
+      -10,
+      10
+    ],
+    [
+      10,
+      10,
+      10
+    ],
+    [
+      10,
+      10,
+      10
+    ]
+  ],
+  "trades": [
+    [
+      10,
+      10,
+      -10
+    ],
+    [
+      0,
+      -20,
+      20
+    ],
+    [
+      0,
+      20,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ]
+  ],
+  "trade_logs": [
+    {
+      "day": 1,
+      "instrument": 0,
+      "side": "BUY",
+      "previous_position": 0,
+      "new_position": 10,
+      "trade_quantity": 10,
+      "signed_quantity": 10,
+      "price": 101.0,
+      "trade_value": 1010.0,
+      "commission": 1.01
+    },
+    {
+      "day": 1,
+      "instrument": 1,
+      "side": "BUY",
+      "previous_position": 0,
+      "new_position": 10,
+      "trade_quantity": 10,
+      "signed_quantity": 10,
+      "price": 51.0,
+      "trade_value": 510.0,
+      "commission": 0.51
+    },
+    {
+      "day": 1,
+      "instrument": 2,
+      "side": "SELL",
+      "previous_position": 0,
+      "new_position": -10,
+      "trade_quantity": 10,
+      "signed_quantity": -10,
+      "price": 198.0,
+      "trade_value": 1980.0,
+      "commission": 1.98
+    },
+    {
+      "day": 2,
+      "instrument": 1,
+      "side": "SELL",
+      "previous_position": 10,
+      "new_position": -10,
+      "trade_quantity": 20,
+      "signed_quantity": -20,
+      "price": 50.0,
+      "trade_value": 1000.0,
+      "commission": 1.0
+    },
+    {
+      "day": 2,
+      "instrument": 2,
+      "side": "BUY",
+      "previous_position": -10,
+      "new_position": 10,
+      "trade_quantity": 20,
+      "signed_quantity": 20,
+      "price": 199.0,
+      "trade_value": 3980.0,
+      "commission": 3.98
+    },
+    {
+      "day": 3,
+      "instrument": 1,
+      "side": "BUY",
+      "previous_position": -10,
+      "new_position": 10,
+      "trade_quantity": 20,
+      "signed_quantity": 20,
+      "price": 52.0,
+      "trade_value": 1040.0,
+      "commission": 1.04
+    }
+  ],
+  "instrument_summary": [
+    {
+      "instrument": 0,
+      "total_pnl": 28.990000000000002,
+      "total_trades": 1,
+      "total_turnover": 1010.0,
+      "total_commission": 1.01,
+      "average_position": 10.0,
+      "max_abs_position": 10,
+      "best_day_pnl": 10.0,
+      "worst_day_pnl": -1.01
+    },
+    {
+      "instrument": 1,
+      "total_pnl": -22.549999999999997,
+      "total_trades": 3,
+      "total_turnover": 2550.0,
+      "total_commission": 2.55,
+      "average_position": 5.0,
+      "max_abs_position": 10,
+      "best_day_pnl": 10.0,
+      "worst_day_pnl": -21.04
+    },
+    {
+      "instrument": 2,
+      "total_pnl": 14.04,
+      "total_trades": 2,
+      "total_turnover": 5960.0,
+      "total_commission": 5.96,
+      "average_position": 5.0,
+      "max_abs_position": 10,
+      "best_day_pnl": 20.0,
+      "worst_day_pnl": -13.98
+    }
+  ],
+  "warnings": [
+    {
+      "code": "HIGH_COMMISSION_DRAG",
+      "severity": "warning",
+      "message": "Commission is high relative to gross P&L.",
+      "metric": "total_commission / max(abs(total_gross_pnl), total_commission, 1)",
+      "value": 0.3173333333333333,
+      "threshold": 0.25
+    },
+    {
+      "code": "HIGH_DAILY_PNL_VOLATILITY",
+      "severity": "warning",
+      "message": "Daily P&L volatility is high relative to average daily P&L.",
+      "metric": "std_daily_pnl / max(abs(mean_daily_pnl), 1)",
+      "value": 3.256619095339353,
+      "threshold": 2.0
+    }
+  ],
+  "clipping_events": []
+}
